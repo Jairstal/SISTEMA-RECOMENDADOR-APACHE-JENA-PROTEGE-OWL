@@ -1,0 +1,1202 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY pizza "http://www.pizza.com/ontologies/pizza.owl#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+]>
+
+
+<rdf:RDF xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://www.w3.org/2002/07/owl"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:pizza="http://www.pizza.com/ontologies/pizza.owl#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+    <Ontology rdf:about="http://www.pizza.com/ontologies/pizza.owl">
+        <rdfs:comment>A pizza ontology that describes various pizzas based on their toppings</rdfs:comment>
+    </Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#hasBase -->
+
+    <ObjectProperty rdf:about="&pizza;hasBase">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="&pizza;Pizza"/>
+        <rdfs:range rdf:resource="&pizza;PizzaBase"/>
+        <rdfs:subPropertyOf rdf:resource="&pizza;hasIngredient"/>
+        <inverseOf rdf:resource="&pizza;isBaseOf"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#hasCountryOfOrigin -->
+
+    <ObjectProperty rdf:about="&pizza;hasCountryOfOrigin"/>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#hasDoughOf -->
+
+    <ObjectProperty rdf:about="&pizza;hasDoughOf">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="&pizza;Pizza"/>
+        <rdfs:range rdf:resource="&pizza;PizzaDough"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#hasIngredient -->
+
+    <ObjectProperty rdf:about="&pizza;hasIngredient">
+        <rdf:type rdf:resource="&owl;TransitiveProperty"/>
+        <rdfs:domain rdf:resource="&pizza;Pizza"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#hasSpiciness -->
+
+    <ObjectProperty rdf:about="&pizza;hasSpiciness">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:range rdf:resource="&pizza;SpicinessValuePartition"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#hasTopping -->
+
+    <ObjectProperty rdf:about="&pizza;hasTopping">
+        <rdfs:domain rdf:resource="&pizza;Pizza"/>
+        <rdfs:range rdf:resource="&pizza;PizzaTopping"/>
+        <rdfs:subPropertyOf rdf:resource="&pizza;hasIngredient"/>
+        <inverseOf rdf:resource="&pizza;isToppingOf"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#isBaseOf -->
+
+    <ObjectProperty rdf:about="&pizza;isBaseOf">
+        <rdfs:range rdf:resource="&pizza;Pizza"/>
+        <rdfs:domain rdf:resource="&pizza;PizzaBase"/>
+        <rdfs:subPropertyOf rdf:resource="&pizza;isIngredientOf"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#isIngredientOf -->
+
+    <ObjectProperty rdf:about="&pizza;isIngredientOf">
+        <rdf:type rdf:resource="&owl;TransitiveProperty"/>
+        <inverseOf rdf:resource="&pizza;hasIngredient"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#isToppingOf -->
+
+    <ObjectProperty rdf:about="&pizza;isToppingOf">
+        <rdfs:range rdf:resource="&pizza;Pizza"/>
+        <rdfs:domain rdf:resource="&pizza;PizzaTopping"/>
+        <rdfs:subPropertyOf rdf:resource="&pizza;isIngredientOf"/>
+    </ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#hasCaloriticContentValue -->
+
+    <DatatypeProperty rdf:about="&pizza;hasCaloriticContentValue">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#AmericanHotPizza -->
+
+    <Class rdf:about="&pizza;AmericanHotPizza">
+        <rdfs:subClassOf rdf:resource="&pizza;NamedPizza"/>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&pizza;hasTopping"/>
+                <someValuesFrom rdf:resource="&pizza;TomatoTopping"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&pizza;hasTopping"/>
+                <someValuesFrom rdf:resource="&pizza;MozzarellaTopping"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&pizza;hasDoughOf"/>
+                <someValuesFrom rdf:resource="&pizza;FlourDough"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&pizza;hasTopping"/>
+                <someValuesFrom rdf:resource="&pizza;PepperoniTopping"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&pizza;hasTopping"/>
+                <allValuesFrom>
+                    <Class>
+                        <unionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="&pizza;JalapenoPepperTopping"/>
+                            <rdf:Description rdf:about="&pizza;MozzarellaTopping"/>
+                            <rdf:Description rdf:about="&pizza;PepperoniTopping"/>
+                            <rdf:Description rdf:about="&pizza;TomatoTopping"/>
+                        </unionOf>
+                    </Class>
+                </allValuesFrom>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&pizza;hasTopping"/>
+                <someValuesFrom rdf:resource="&pizza;JalapenoPepperTopping"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>Una pizza que solo tiene Mozarella y
+Ingredientes de tomate</rdfs:comment>
+    </Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#AmericanaPizza -->
+
+    <Class rdf:about="&pizza;AmericanaPizza">
+        <rdfs:subClassOf rdf:resource="&pizza;NamedPizza"/>
+        <rdf:Description rdf:about="&pizza;MozzarellaTopping"/>
+        <rdf:Description rdf:about="&pizza;PepperoniTopping"/>
+        <rdf:Description rdf:about="&pizza;TomatoTopping"/>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&pizza;hasTopping"/>
+                <allValuesFrom>
+                    <Class>
+                        <unionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="&pizza;MozzarellaTopping"/>
+                            <rdf:Description rdf:about="&pizza;PepperoniTopping"/>
+                            <rdf:Description rdf:about="&pizza;TomatoTopping"/>
+                        </unionOf>
+                    </Class>
+                </allValuesFrom>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&pizza;hasTopping"/>
+                <someValuesFrom rdf:resource="&pizza;PepperoniTopping"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&pizza;hasTopping"/>
+                <someValuesFrom rdf:resource="&pizza;TomatoTopping"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&pizza;hasDoughOf"/>
+                <someValuesFrom rdf:resource="&pizza;FlourDough"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&pizza;hasTopping"/>
+                <someValuesFrom rdf:resource="&pizza;MozzarellaTopping"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>Una pizza que solo tiene Mozarella y
+Ingredientes de tomate</rdfs:comment>
+    </Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#AnchovyTopping -->
+
+    <Class rdf:about="&pizza;AnchovyTopping">
+        <rdfs:subClassOf rdf:resource="&pizza;SeafoodTopping"/>
+    </Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#CaperTopping -->
+
+    <Class rdf:about="&pizza;CaperTopping">
+        <rdfs:subClassOf rdf:resource="&pizza;VegetableTopping"/>
+    </Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#CheeseTopping -->
+
+    <Class rdf:about="&pizza;CheeseTopping">
+        <rdfs:subClassOf rdf:resource="&pizza;PizzaTopping"/>
+        <rdfs:comment>Tipo de queso</rdfs:comment>
+    </Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#CheesyPizza -->
+
+    <Class rdf:about="&pizza;CheesyPizza">
+        <equivalentClass>
+            <Class>
+                <intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&pizza;Pizza"/>
+                    <Restriction>
+                        <onProperty rdf:resource="&pizza;hasTopping"/>
+                        <someValuesFrom rdf:resource="&pizza;CheeseTopping"/>
+                    </Restriction>
+                </intersectionOf>
+            </Class>
+        </equivalentClass>
+    </Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#Country -->
+
+    <Class rdf:about="&pizza;Country">
+        <equivalentClass>
+            <Class>
+                <oneOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&pizza;Francia"/>
+                    <rdf:Description rdf:about="&pizza;America"/>
+                    <rdf:Description rdf:about="&pizza;Italy"/>
+                    <rdf:Description rdf:about="&pizza;Inglaterra"/>
+                </oneOf>
+            </Class>
+        </equivalentClass>
+    </Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#DeepPanBase -->
+
+    <Class rdf:about="&pizza;DeepPanBase">
+        <rdfs:subClassOf rdf:resource="&pizza;PizzaBase"/>
+        <disjointWith rdf:resource="&pizza;ThinAndCrispyBase"/>
+    </Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#FlourDough -->
+
+    <Class rdf:about="&pizza;FlourDough">
+        <rdfs:subClassOf rdf:resource="&pizza;TraditionalDough"/>
+    </Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#FourCheesePizza -->
+
+    <Class rdf:about="&pizza;FourCheesePizza">
+        <equivalentClass>
+            <Class>
+                <intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&pizza;Pizza"/>
+                    <Restriction>
+                        <onProperty rdf:resource="&pizza;hasTopping"/>
+                        <onClass rdf:resource="&pizza;CheeseTopping"/>
+                        <qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">4</qualifiedCardinality>
+                    </Restriction>
+                </intersectionOf>
+            </Class>
+        </equivalentClass>
+    </Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#GreenPepperTopping -->
+
+    <Class rdf:about="&pizza;GreenPepperTopping">
+        <rdfs:subClassOf rdf:resource="&pizza;PepperTopping"/>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&pizza;hasSpiciness"/>
+                <someValuesFrom rdf:resource="&pizza;Hot"/>
+            </Restriction>
+        </rdfs:subClassOf>
+    </Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#HamTopping -->
+
+    <Class rdf:about="&pizza;HamTopping">
+        <rdfs:subClassOf rdf:resource="&pizza;MeatTopping"/>
+        <rdfs:comment>Jamon</rdfs:comment>
+    </Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#HighCaloriePizza -->
+
+    <Class rdf:about="&pizza;HighCaloriePizza">
+        <equivalentClass>
+            <Class>
+                <intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&pizza;Pizza"/>
+                    <Restriction>
+                        <onProperty rdf:resource="&pizza;hasCaloriticContentValue"/>
+                        <someValuesFrom>
+                            <rdfs:Datatype>
+                                <onDatatype rdf:resource="&xsd;integer"/>
+                                <withRestrictions rdf:parseType="Collection">
+                                    <rdf:Description>
+                                        <xsd:minInclusive rdf:datatype="&xsd;integer">400</xsd:minInclusive>
+                                    </rdf:Description>
+                                </withRestrictions>
+                            </rdfs:Datatype>
+                        </someValuesFrom>
+                    </Restriction>
+                </intersectionOf>
+            </Class>
+        </equivalentClass>
+    </Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#Hot -->
+
+    <Class rdf:about="&pizza;Hot">
+        <rdfs:subClassOf rdf:resource="&pizza;SpicinessValuePartition"/>
+    </Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#JalapenoPepperTopping -->
+
+    <Class rdf:about="&pizza;JalapenoPepperTopping">
+        <rdfs:subClassOf rdf:resource="&pizza;PepperTopping"/>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&pizza;hasSpiciness"/>
+                <someValuesFrom rdf:resource="&pizza;Hot"/>
+            </Restriction>
+        </rdfs:subClassOf>
+    </Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#LowCaloriePizza -->
+
+    <Class rdf:about="&pizza;LowCaloriePizza">
+        <equivalentClass>
+            <Class>
+                <intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&pizza;Pizza"/>
+                    <Restriction>
+                        <onProperty rdf:resource="&pizza;hasCaloriticContentValue"/>
+                        <someValuesFrom>
+                            <rdfs:Datatype>
+                                <onDatatype rdf:resource="&xsd;integer"/>
+                                <withRestrictions rdf:parseType="Collection">
+                                    <rdf:Description>
+                                        <xsd:maxExclusive rdf:datatype="&xsd;integer">400</xsd:maxExclusive>
+                                    </rdf:Description>
+                                </withRestrictions>
+                            </rdfs:Datatype>
+                        </someValuesFrom>
+                    </Restriction>
+                </intersectionOf>
+            </Class>
+        </equivalentClass>
+    </Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#MargheritaPizza -->
+
+    <Class rdf:about="&pizza;MargheritaPizza">
+        <rdfs:subClassOf rdf:resource="&pizza;NamedPizza"/>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&pizza;hasTopping"/>
+                <allValuesFrom>
+                    <Class>
+                        <unionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="&pizza;MozzarellaTopping"/>
+                            <rdf:Description rdf:about="&pizza;TomatoTopping"/>
+                        </unionOf>
+                    </Class>
+                </allValuesFrom>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&pizza;hasTopping"/>
+                <someValuesFrom rdf:resource="&pizza;MozzarellaTopping"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&pizza;hasDoughOf"/>
+                <someValuesFrom rdf:resource="&pizza;PumpkinDough"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&pizza;hasTopping"/>
+                <someValuesFrom rdf:resource="&pizza;TomatoTopping"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>Una pizza que solo tiene Mozarella y
+Ingredientes de tomate</rdfs:comment>
+    </Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#MeatTopping -->
+
+    <Class rdf:about="&pizza;MeatTopping">
+        <rdfs:subClassOf rdf:resource="&pizza;PizzaTopping"/>
+        <rdfs:comment>Tipo de carnes </rdfs:comment>
+    </Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#Medium -->
+
+    <Class rdf:about="&pizza;Medium">
+        <rdfs:subClassOf rdf:resource="&pizza;SpicinessValuePartition"/>
+    </Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#Mild -->
+
+    <Class rdf:about="&pizza;Mild">
+        <rdfs:subClassOf rdf:resource="&pizza;SpicinessValuePartition"/>
+    </Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#MozzarellaTopping -->
+
+    <Class rdf:about="&pizza;MozzarellaTopping">
+        <rdfs:subClassOf rdf:resource="&pizza;CheeseTopping"/>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&pizza;hasCountryOfOrigin"/>
+                <hasValue rdf:resource="&pizza;Italy"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <disjointWith rdf:resource="&pizza;ParmezanTopping"/>
+    </Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#MushroomTopping -->
+
+    <Class rdf:about="&pizza;MushroomTopping">
+        <rdfs:subClassOf rdf:resource="&pizza;VegetableTopping"/>
+    </Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#NamedPizza -->
+
+    <Class rdf:about="&pizza;NamedPizza">
+        <rdfs:subClassOf rdf:resource="&pizza;Pizza"/>
+    </Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#NoVegetarianPizza -->
+
+    <Class rdf:about="&pizza;NoVegetarianPizza">
+        <equivalentClass>
+            <Class>
+                <intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&pizza;Pizza"/>
+                    <Class>
+                        <complementOf rdf:resource="&pizza;VegetarianPizza"/>
+                    </Class>
+                </intersectionOf>
+            </Class>
+        </equivalentClass>
+        <disjointWith rdf:resource="&pizza;VegetarianPizza"/>
+    </Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#OatDough -->
+
+    <Class rdf:about="&pizza;OatDough">
+        <rdfs:subClassOf rdf:resource="&pizza;SpecialDough"/>
+        <disjointWith rdf:resource="&pizza;PumpkinDough"/>
+    </Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#OliveTopping -->
+
+    <Class rdf:about="&pizza;OliveTopping">
+        <rdfs:subClassOf rdf:resource="&pizza;VegetableTopping"/>
+    </Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#OnionTopping -->
+
+    <Class rdf:about="&pizza;OnionTopping">
+        <rdfs:subClassOf rdf:resource="&pizza;VegetableTopping"/>
+    </Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#ParmezanTopping -->
+
+    <Class rdf:about="&pizza;ParmezanTopping">
+        <rdfs:subClassOf rdf:resource="&pizza;CheeseTopping"/>
+    </Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#PepperTopping -->
+
+    <Class rdf:about="&pizza;PepperTopping">
+        <rdfs:subClassOf rdf:resource="&pizza;VegetableTopping"/>
+    </Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#PepperoniTopping -->
+
+    <Class rdf:about="&pizza;PepperoniTopping">
+        <rdfs:subClassOf rdf:resource="&pizza;MeatTopping"/>
+    </Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#Pizza -->
+
+    <Class rdf:about="&pizza;Pizza">
+        <rdfs:subClassOf rdf:resource="&owl;Thing"/>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&pizza;hasCaloriticContentValue"/>
+                <someValuesFrom rdf:resource="&xsd;integer"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&pizza;hasDoughOf"/>
+                <someValuesFrom rdf:resource="&pizza;PizzaDough"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&pizza;hasBase"/>
+                <someValuesFrom rdf:resource="&pizza;PizzaBase"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>Clase de pizzas </rdfs:comment>
+    </Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#PizzaBase -->
+
+    <Class rdf:about="&pizza;PizzaBase">
+        <rdfs:comment>Una base de Pizza de diferentes tipos</rdfs:comment>
+    </Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#PizzaDough -->
+
+    <Class rdf:about="&pizza;PizzaDough"/>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#PizzaTopping -->
+
+    <Class rdf:about="&pizza;PizzaTopping">
+        <rdfs:comment>Ingredientes de Pizza</rdfs:comment>
+    </Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#PrawnTopping -->
+
+    <Class rdf:about="&pizza;PrawnTopping">
+        <rdfs:subClassOf rdf:resource="&pizza;SeafoodTopping"/>
+    </Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#PumpkinDough -->
+
+    <Class rdf:about="&pizza;PumpkinDough">
+        <rdfs:subClassOf rdf:resource="&pizza;SpecialDough"/>
+    </Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#RedPepperTopping -->
+
+    <Class rdf:about="&pizza;RedPepperTopping">
+        <rdfs:subClassOf rdf:resource="&pizza;PepperTopping"/>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&pizza;hasSpiciness"/>
+                <someValuesFrom rdf:resource="&pizza;Hot"/>
+            </Restriction>
+        </rdfs:subClassOf>
+    </Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#SalamiTopping -->
+
+    <Class rdf:about="&pizza;SalamiTopping">
+        <rdfs:subClassOf rdf:resource="&pizza;MeatTopping"/>
+    </Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#SeafoodTopping -->
+
+    <Class rdf:about="&pizza;SeafoodTopping">
+        <rdfs:subClassOf rdf:resource="&pizza;PizzaTopping"/>
+        <rdfs:comment>tipos de mariscos</rdfs:comment>
+    </Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#SohoPizza -->
+
+    <Class rdf:about="&pizza;SohoPizza">
+        <rdfs:subClassOf rdf:resource="&pizza;NamedPizza"/>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&pizza;hasTopping"/>
+                <someValuesFrom rdf:resource="&pizza;MozzarellaTopping"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&pizza;hasTopping"/>
+                <someValuesFrom rdf:resource="&pizza;ParmezanTopping"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&pizza;hasTopping"/>
+                <someValuesFrom rdf:resource="&pizza;OliveTopping"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&pizza;hasDoughOf"/>
+                <someValuesFrom rdf:resource="&pizza;FlourDough"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&pizza;hasTopping"/>
+                <allValuesFrom>
+                    <Class>
+                        <unionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="&pizza;MozzarellaTopping"/>
+                            <rdf:Description rdf:about="&pizza;OliveTopping"/>
+                            <rdf:Description rdf:about="&pizza;ParmezanTopping"/>
+                            <rdf:Description rdf:about="&pizza;TomatoTopping"/>
+                        </unionOf>
+                    </Class>
+                </allValuesFrom>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&pizza;hasTopping"/>
+                <someValuesFrom rdf:resource="&pizza;TomatoTopping"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>Una pizza que solo tiene Mozarella y
+Ingredientes de tomate</rdfs:comment>
+    </Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#SpecialDough -->
+
+    <Class rdf:about="&pizza;SpecialDough">
+        <rdfs:subClassOf rdf:resource="&pizza;PizzaDough"/>
+    </Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#SpecialDoughPizza -->
+
+    <Class rdf:about="&pizza;SpecialDoughPizza">
+        <equivalentClass>
+            <Class>
+                <intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&pizza;Pizza"/>
+                    <Restriction>
+                        <onProperty rdf:resource="&pizza;hasDoughOf"/>
+                        <allValuesFrom rdf:resource="&pizza;SpecialDough"/>
+                    </Restriction>
+                </intersectionOf>
+            </Class>
+        </equivalentClass>
+    </Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#SpicinessValuePartition -->
+
+    <Class rdf:about="&pizza;SpicinessValuePartition">
+        <equivalentClass>
+            <Class>
+                <unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&pizza;Hot"/>
+                    <rdf:Description rdf:about="&pizza;Medium"/>
+                    <rdf:Description rdf:about="&pizza;Mild"/>
+                </unionOf>
+            </Class>
+        </equivalentClass>
+        <rdfs:subClassOf rdf:resource="&pizza;ValuePartition"/>
+    </Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#SpicyBeefTopping -->
+
+    <Class rdf:about="&pizza;SpicyBeefTopping">
+        <rdfs:subClassOf rdf:resource="&pizza;MeatTopping"/>
+    </Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#SpicyPizza -->
+
+    <Class rdf:about="&pizza;SpicyPizza">
+        <equivalentClass>
+            <Class>
+                <intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&pizza;Pizza"/>
+                    <Restriction>
+                        <onProperty rdf:resource="&pizza;hasTopping"/>
+                        <someValuesFrom>
+                            <Class>
+                                <intersectionOf rdf:parseType="Collection">
+                                    <rdf:Description rdf:about="&pizza;PizzaTopping"/>
+                                    <Restriction>
+                                        <onProperty rdf:resource="&pizza;hasSpiciness"/>
+                                        <someValuesFrom rdf:resource="&pizza;Hot"/>
+                                    </Restriction>
+                                </intersectionOf>
+                            </Class>
+                        </someValuesFrom>
+                    </Restriction>
+                </intersectionOf>
+            </Class>
+        </equivalentClass>
+    </Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#ThinAndCrispyBase -->
+
+    <Class rdf:about="&pizza;ThinAndCrispyBase">
+        <rdfs:subClassOf rdf:resource="&pizza;PizzaBase"/>
+    </Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#TomatoTopping -->
+
+    <Class rdf:about="&pizza;TomatoTopping">
+        <rdfs:subClassOf rdf:resource="&pizza;VegetableTopping"/>
+    </Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#TraditionalDough -->
+
+    <Class rdf:about="&pizza;TraditionalDough">
+        <rdfs:subClassOf rdf:resource="&pizza;PizzaDough"/>
+    </Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#TraditionalDoughPizza -->
+
+    <Class rdf:about="&pizza;TraditionalDoughPizza">
+        <equivalentClass>
+            <Class>
+                <intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&pizza;Pizza"/>
+                    <Restriction>
+                        <onProperty rdf:resource="&pizza;hasDoughOf"/>
+                        <allValuesFrom rdf:resource="&pizza;TraditionalDough"/>
+                    </Restriction>
+                </intersectionOf>
+            </Class>
+        </equivalentClass>
+    </Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#TunaTopping -->
+
+    <Class rdf:about="&pizza;TunaTopping">
+        <rdfs:subClassOf rdf:resource="&pizza;SeafoodTopping"/>
+    </Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#UnclosedPizza -->
+
+    <Class rdf:about="&pizza;UnclosedPizza">
+        <rdfs:subClassOf rdf:resource="&pizza;NamedPizza"/>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&pizza;hasDoughOf"/>
+                <someValuesFrom rdf:resource="&pizza;OatDough"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&pizza;hasTopping"/>
+                <someValuesFrom rdf:resource="&pizza;MozzarellaTopping"/>
+            </Restriction>
+        </rdfs:subClassOf>
+    </Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#ValuePartition -->
+
+    <Class rdf:about="&pizza;ValuePartition"/>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#VegetableTopping -->
+
+    <Class rdf:about="&pizza;VegetableTopping">
+        <rdfs:subClassOf rdf:resource="&pizza;PizzaTopping"/>
+        <rdfs:comment>vegetales para pizza</rdfs:comment>
+    </Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#VegetarianPizza -->
+
+    <Class rdf:about="&pizza;VegetarianPizza">
+        <equivalentClass>
+            <Class>
+                <intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&pizza;Pizza"/>
+                    <Restriction>
+                        <onProperty rdf:resource="&pizza;hasTopping"/>
+                        <allValuesFrom>
+                            <Class>
+                                <unionOf rdf:parseType="Collection">
+                                    <rdf:Description rdf:about="&pizza;CheeseTopping"/>
+                                    <rdf:Description rdf:about="&pizza;VegetableTopping"/>
+                                </unionOf>
+                            </Class>
+                        </allValuesFrom>
+                    </Restriction>
+                </intersectionOf>
+            </Class>
+        </equivalentClass>
+    </Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#Whim3Pizza -->
+
+    <Class rdf:about="&pizza;Whim3Pizza">
+        <rdfs:subClassOf rdf:resource="&pizza;NamedPizza"/>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&pizza;hasTopping"/>
+                <someValuesFrom rdf:resource="&pizza;TomatoTopping"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&pizza;hasTopping"/>
+                <someValuesFrom rdf:resource="&pizza;OnionTopping"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&pizza;hasDoughOf"/>
+                <allValuesFrom rdf:resource="&pizza;FlourDough"/>
+            </Restriction>
+        </rdfs:subClassOf>
+    </Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#WhimPizza -->
+
+    <Class rdf:about="&pizza;WhimPizza">
+        <rdfs:subClassOf rdf:resource="&pizza;NamedPizza"/>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&pizza;hasTopping"/>
+                <someValuesFrom rdf:resource="&pizza;PepperoniTopping"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&pizza;hasDoughOf"/>
+                <allValuesFrom rdf:resource="&pizza;OatDough"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&pizza;hasTopping"/>
+                <someValuesFrom rdf:resource="&pizza;TomatoTopping"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&pizza;hasTopping"/>
+                <someValuesFrom rdf:resource="&pizza;ParmezanTopping"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&pizza;hasTopping"/>
+                <someValuesFrom rdf:resource="&pizza;OnionTopping"/>
+            </Restriction>
+        </rdfs:subClassOf>
+    </Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#Alemania -->
+
+    <NamedIndividual rdf:about="&pizza;Alemania">
+        <rdf:type rdf:resource="&pizza;Country"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#America -->
+
+    <NamedIndividual rdf:about="&pizza;America">
+        <rdf:type rdf:resource="&pizza;Country"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#ExampleMargherita -->
+
+    <NamedIndividual rdf:about="&pizza;ExampleMargherita">
+        <rdf:type rdf:resource="&pizza;MargheritaPizza"/>
+        <pizza:hasCaloriticContentValue rdf:datatype="&xsd;integer">263</pizza:hasCaloriticContentValue>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#Francia -->
+
+    <NamedIndividual rdf:about="&pizza;Francia">
+        <rdf:type rdf:resource="&pizza;Country"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#Inglaterra -->
+
+    <NamedIndividual rdf:about="&pizza;Inglaterra">
+        <rdf:type rdf:resource="&pizza;Country"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#Italy -->
+
+    <NamedIndividual rdf:about="&pizza;Italy">
+        <rdf:type rdf:resource="&pizza;Country"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#QuattroFormaggio -->
+
+    <NamedIndividual rdf:about="&pizza;QuattroFormaggio">
+        <rdf:type rdf:resource="&pizza;AmericanHotPizza"/>
+        <pizza:hasCaloriticContentValue rdf:datatype="&xsd;integer">723</pizza:hasCaloriticContentValue>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#Whim2 -->
+
+    <NamedIndividual rdf:about="&pizza;Whim2">
+        <rdf:type rdf:resource="&pizza;Whim3Pizza"/>
+        <pizza:hasCaloriticContentValue rdf:datatype="&xsd;integer">346</pizza:hasCaloriticContentValue>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#exampleWhim -->
+
+    <NamedIndividual rdf:about="&pizza;exampleWhim">
+        <rdf:type rdf:resource="&pizza;SohoPizza"/>
+        <pizza:hasCaloriticContentValue rdf:datatype="&xsd;integer">540</pizza:hasCaloriticContentValue>
+    </NamedIndividual>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // General axioms
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description>
+        <rdf:type rdf:resource="&owl;AllDisjointClasses"/>
+        <members rdf:parseType="Collection">
+            <rdf:Description rdf:about="&pizza;CaperTopping"/>
+            <rdf:Description rdf:about="&pizza;MushroomTopping"/>
+            <rdf:Description rdf:about="&pizza;OliveTopping"/>
+            <rdf:Description rdf:about="&pizza;OnionTopping"/>
+            <rdf:Description rdf:about="&pizza;PepperTopping"/>
+            <rdf:Description rdf:about="&pizza;TomatoTopping"/>
+        </members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="&owl;AllDisjointClasses"/>
+        <members rdf:parseType="Collection">
+            <rdf:Description rdf:about="&pizza;Pizza"/>
+            <rdf:Description rdf:about="&pizza;PizzaBase"/>
+            <rdf:Description rdf:about="&pizza;PizzaTopping"/>
+        </members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="&owl;AllDisjointClasses"/>
+        <members rdf:parseType="Collection">
+            <rdf:Description rdf:about="&pizza;Hot"/>
+            <rdf:Description rdf:about="&pizza;Medium"/>
+            <rdf:Description rdf:about="&pizza;Mild"/>
+        </members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="&owl;AllDisjointClasses"/>
+        <members rdf:parseType="Collection">
+            <rdf:Description rdf:about="&pizza;CheeseTopping"/>
+            <rdf:Description rdf:about="&pizza;MeatTopping"/>
+            <rdf:Description rdf:about="&pizza;SeafoodTopping"/>
+            <rdf:Description rdf:about="&pizza;VegetableTopping"/>
+        </members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="&owl;AllDisjointClasses"/>
+        <members rdf:parseType="Collection">
+            <rdf:Description rdf:about="&pizza;Pizza"/>
+            <rdf:Description rdf:about="&pizza;PizzaBase"/>
+            <rdf:Description rdf:about="&pizza;PizzaDough"/>
+            <rdf:Description rdf:about="&pizza;PizzaTopping"/>
+            <rdf:Description rdf:about="&pizza;ValuePartition"/>
+        </members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="&owl;AllDisjointClasses"/>
+        <members rdf:parseType="Collection">
+            <rdf:Description rdf:about="&pizza;GreenPepperTopping"/>
+            <rdf:Description rdf:about="&pizza;JalapenoPepperTopping"/>
+            <rdf:Description rdf:about="&pizza;RedPepperTopping"/>
+        </members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="&owl;AllDisjointClasses"/>
+        <members rdf:parseType="Collection">
+            <rdf:Description rdf:about="&pizza;HamTopping"/>
+            <rdf:Description rdf:about="&pizza;PepperoniTopping"/>
+            <rdf:Description rdf:about="&pizza;SalamiTopping"/>
+            <rdf:Description rdf:about="&pizza;SpicyBeefTopping"/>
+        </members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="&owl;AllDisjointClasses"/>
+        <members rdf:parseType="Collection">
+            <rdf:Description rdf:about="&pizza;AnchovyTopping"/>
+            <rdf:Description rdf:about="&pizza;PrawnTopping"/>
+            <rdf:Description rdf:about="&pizza;TunaTopping"/>
+        </members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="&owl;AllDisjointClasses"/>
+        <members rdf:parseType="Collection">
+            <rdf:Description rdf:about="&pizza;AmericanHotPizza"/>
+            <rdf:Description rdf:about="&pizza;AmericanaPizza"/>
+            <rdf:Description rdf:about="&pizza;MargheritaPizza"/>
+            <rdf:Description rdf:about="&pizza;SohoPizza"/>
+        </members>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 3.4.2) http://owlapi.sourceforge.net -->
+
